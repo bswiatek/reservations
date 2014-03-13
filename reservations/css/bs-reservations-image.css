@@ -1,0 +1,8 @@
+﻿#add-billboard-link{
+	cursor: pointer;
+	text-decoration: underline;
+	display: block;
+}
+#add-billboard-form{
+	display: none;
+}
