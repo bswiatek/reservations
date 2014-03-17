@@ -27,6 +27,20 @@ function bs_reservations_install() {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
 	}
+	
+	$tablename = $wpdb->prefix."rezerwacja";
+	if( $wpdb->get_var("SHOW TABLES LIKE '$tablename'") != $tablename ) {
+		$sql = "CREATE TABLE $tablename (
+			rezerwacja_id INT(11) NOT NULL AUTO_INCREMENT,
+			rezerwacja_id_tablicy INT(11) NOT NULL,
+			rezerwacja_od DATE,
+			rezerwacja_do DATE,
+			rezerwacja_typ ENUM('rezerwacja','zajeta') NOT NULL default 'zajeta',
+			PRIMARY KEY (rezerwacja_id)
+		);";
+		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+		dbDelta($sql);
+	}
 }
 register_deactivation_hook( __FILE__, ‘bs_reservations_uninstall’ );
 function bs_reservations_uninstall() {
@@ -47,15 +61,6 @@ function bs_reservations_create_menu() {
 	add_submenu_page( __FILE__, 'Zarządzanie rozmiarami tablic', 'Rozmiary tablic', 'manage_options', __FILE__.'_zarzadzanie_rozmiarami_tablic', bs_reservations_zarzadzanie_rozmiarami_tablic );
 	add_submenu_page( __FILE__, 'Dane kontaktowe', 'Kontakt', 'manage_options', __FILE__.'_dane_kontaktowe', bs_reservations_dane_kontaktowe );
 }
-function bs_reservations_zarzadzanie_rezerwacjami() {
-	?>
-	<div class='wrap'>
-		<h2>Zarządzanie rezerwacjami</h2>
-		<input type="submit" name="Save" value="Save Options" class="button-primary" />
-		<input type="submit" name="Secondary" value="Secondary Button" class="button-secondary" />
-	</div>
-	<?php
-}
 
 //rezerwacje - akcja do biblioteki multimediów
 add_action('admin_enqueue_scripts', 'my_admin_scripts');
@@ -74,5 +79,6 @@ function my_admin_scripts() {
 
 
 include_once "includes/zarzadzanie_tablicami.php";
+include_once "includes/zarzadzanie_rezerwacjami.php";
 include_once "includes/zarzadzanie_rozmiarami_tablic.php";
 include_once "includes/dane_kontaktowe.php";
