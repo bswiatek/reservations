@@ -51,5 +51,3 @@ function bs_reservations_zarzadzanie_rozmiarami_tablic() {
 		</div>
 	<?php
 }
-
-?>

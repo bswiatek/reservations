@@ -1,0 +1,19 @@
+.switcher{
+	cursor: pointer;
+	text-decoration: underline;
+	display: block;
+}
+#add-billboard-form{
+	display: none;
+}
+.tablesorter th.header{
+  background: url("../images/asc_desc.gif") no-repeat right 5px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+.tablesorter th.headerSortDown{
+  background: url("../images/desc.gif") no-repeat right 7px;
+}
+.tablesorter th.headerSortUp{
+  background: url("../images/asc.gif") no-repeat right 7px;
+}
